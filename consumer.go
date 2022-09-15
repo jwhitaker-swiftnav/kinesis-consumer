@@ -276,6 +276,12 @@ func (c *Consumer) getShardIterator(ctx context.Context, streamName, shardID, se
 	}
 
 	res, err := c.client.GetShardIterator(ctx, params)
+	if err != nil {
+		return nil, err
+	}
+	if res == nil {
+		panic("res still nil")
+	}
 	return res.ShardIterator, err
 }
 
